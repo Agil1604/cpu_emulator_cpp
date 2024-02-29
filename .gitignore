@@ -1,0 +1,12 @@
+output/
+.vscode/
+*.cmake
+CMakeCache.txt
+CMakeFiles/
+bin/
+Makefile
+_deps/
+*.a
+my_test
+main
+output/
