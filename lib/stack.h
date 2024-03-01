@@ -11,7 +11,11 @@ namespace my_stack
         T *ptr;
         size_t size;
         size_t n;
-
+        static void swap(stack& left, stack& right) noexcept {
+            std::swap(left.size, right.size);
+            std::swap(left.n, right.n);
+            std::swap(left.ptr, right.ptr);
+        }
     public:
         void push(T elem);
         T pop();
