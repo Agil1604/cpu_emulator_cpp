@@ -19,7 +19,7 @@ namespace my_stack
     public:
         void push(T elem);
         T pop();
-        T top();
+        T& top();
 
         /// @brief дефолтный конструктор
         stack()
@@ -85,7 +85,7 @@ namespace my_stack
     /// @tparam T тип данных, который стек содержит
     /// @param elem добавляемый элемент
     template <typename T>
-    inline void stack<T>::push(T elem)
+    void stack<T>::push(T elem)
     {
         if (n < size)
         {
@@ -108,7 +108,7 @@ namespace my_stack
     /// @brief метод, который удаляет верхний элемент стека
     /// @tparam T тип данных, который стек содержит
     template <typename T>
-    inline T stack<T>::pop()
+    T stack<T>::pop()
     {
         try
         {
@@ -129,7 +129,7 @@ namespace my_stack
     /// @brief метод для просмотра верхнего элемента стека
     /// @tparam T тип данных, который стек содержит
     template <typename T>
-    inline T stack<T>::top()
+    T& stack<T>::top()
     {
         try
         {

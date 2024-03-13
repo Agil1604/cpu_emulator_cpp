@@ -48,10 +48,11 @@ TEST(constructors, moving)
 TEST(constructors, assigment_copying)
 {
     my_stack::stack<int> a;
-    a.push(15);
+    a.push(10);
     my_stack::stack<int> b;
-    b = a;
-    EXPECT_EQ(b.top(), 15);
+    b.push(15);
+    a = b;
+    EXPECT_EQ(a.top(), 15);
 }
 
 TEST(constructors, assigment_moving)
