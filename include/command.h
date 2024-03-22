@@ -1,10 +1,6 @@
 #pragma once
 #include "arch.h"
 
-//------------------
-// Command subtypes
-//------------------
-
 enum CommandType : Cmd_t
 {
     NOTHING = 0,
@@ -135,14 +131,10 @@ public:
     void execute() const;
 };
 
-//--------------------------
-// Polymorphic command type
-//--------------------------
 
 class Command
 {
 public:
-    // Existance management:
     Command();
     Command(CommandBegin *cmd);
     Command(CommandEnd *cmd);
@@ -159,18 +151,15 @@ public:
 
     ~Command();
 
-    // Ensure command is never copied:
     Command(const Command &) = delete;
     Command(Command &&);
 
     Command &operator=(const Command &) = delete;
     Command &operator=(Command &&);
 
-    // Command execution:
     void execute() const;
 
 private:
-    // Memory management utility:
     void release();
 
     CommandType type_;

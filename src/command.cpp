@@ -1,12 +1,8 @@
-#include "arch.h"
 #include "command.h"
+#include "arch.h"
 
 #include <cstdio>
 #include <stdexcept>
-
-//----------------------
-// Command construction
-//----------------------
 
 CommandPush::CommandPush(Val_t val) : val_(val)
 {
@@ -20,9 +16,7 @@ CommandPopr::CommandPopr(Reg_t reg) : reg_(reg)
 {
 }
 
-//-------------------
-// Command execution
-//-------------------
+
 
 void CommandBegin::execute() const
 {
@@ -65,7 +59,7 @@ void CommandSub::execute() const
 {
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
-    program_stack.push(op1 - op2);
+    program_stack.push(op2 - op1);
 }
 
 void CommandMul::execute() const
@@ -79,7 +73,7 @@ void CommandDiv::execute() const
 {
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
-    program_stack.push(op1 / op2);
+    program_stack.push(op2 / op1);
 }
 
 void CommandOut::execute() const
@@ -93,10 +87,6 @@ void CommandIn::execute() const
     std::cin >> tmp;
     program_stack.push(tmp);
 }
-
-//--------------------------
-// Polymorphic command type
-//--------------------------
 
 Command::Command() : type_(CommandType::NOTHING),
                      ptr_(nullptr)
@@ -134,32 +124,32 @@ Command::Command(CommandPopr *cmd) : type_(CommandType::POPR),
 }
 
 Command::Command(CommandAdd *cmd) : type_(CommandType::ADD),
-                                     ptr_(cmd)
+                                    ptr_(cmd)
 {
 }
 
 Command::Command(CommandSub *cmd) : type_(CommandType::SUB),
-                                     ptr_(cmd)
+                                    ptr_(cmd)
 {
 }
 
 Command::Command(CommandMul *cmd) : type_(CommandType::MUL),
-                                     ptr_(cmd)
+                                    ptr_(cmd)
 {
 }
 
 Command::Command(CommandDiv *cmd) : type_(CommandType::DIV),
-                                     ptr_(cmd)
+                                    ptr_(cmd)
 {
 }
 
 Command::Command(CommandOut *cmd) : type_(CommandType::OUT),
-                                     ptr_(cmd)
+                                    ptr_(cmd)
 {
 }
 
 Command::Command(CommandIn *cmd) : type_(CommandType::IN),
-                                     ptr_(cmd)
+                                   ptr_(cmd)
 {
 }
 
@@ -349,8 +339,6 @@ void Command::release()
     }
     default:
     {
-        // NOTE: from C++11 destructors are ‘noexcept’ by default
-        // throw std::runtime_error("Command::~Command(): invalid Command type");
     }
     }
 

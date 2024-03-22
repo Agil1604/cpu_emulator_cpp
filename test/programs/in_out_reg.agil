@@ -1,0 +1,12 @@
+BEGIN
+    IN
+    OUT
+    IN
+    POPR AX
+    IN
+    POPR BX
+    PUSHR AX
+    OUT
+    PUSHR BX
+    OUT
+END

@@ -69,10 +69,6 @@ bool Parser::parse_pattern(std::regex regexp, std::string &ret)
     return match_status;
 }
 
-//--------------------------
-// Recursive Descent Parser
-//--------------------------
-
 bool Parser::parse_space_sequence()
 {
     static const std::regex pattern{"[ \t]+"};
