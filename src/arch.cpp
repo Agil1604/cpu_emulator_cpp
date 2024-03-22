@@ -1,8 +1,6 @@
 #include "arch.h"
 #include "command.h"
 
-#include <iostream>
-#include <stdexcept>
 #include <vector>
 
 static std::vector<std::string> CMD_NAME_TO_CMD_ID = {

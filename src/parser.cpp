@@ -1,11 +1,6 @@
 #include "parser.h"
 #include "arch.h"
 
-#include <cstring>
-#include <iostream>
-#include <stdexcept>
-#include <stdlib.h>
-
 Parser::Parser(const char *filename) : file_(std::ifstream(filename, std::ios::in))
 {
     if (!file_.good())
@@ -238,9 +233,6 @@ Command Parser::parse_command_line()
     }
     }
 
-    // Parse newline:
-    // NOTE: as in C, every program is expected to end with newline.
-    // NOTE: in C it is Undefined Behavior to skip trailing file newline.
     parse_newline_sequence();
 
     return to_return;

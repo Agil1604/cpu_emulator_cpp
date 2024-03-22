@@ -3,9 +3,7 @@
 #include "command.h"
 
 #include <fstream>
-#include <iterator>
 #include <regex>
-#include <vector>
 
 #define MAX_LINE_SIZE 120U
 

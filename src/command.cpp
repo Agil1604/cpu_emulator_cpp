@@ -1,9 +1,6 @@
 #include "command.h"
 #include "arch.h"
 
-#include <cstdio>
-#include <stdexcept>
-
 CommandPush::CommandPush(Val_t val) : val_(val)
 {
 }
@@ -20,12 +17,12 @@ CommandPopr::CommandPopr(Reg_t reg) : reg_(reg)
 
 void CommandBegin::execute() const
 {
-    printf("BEGIN\n");
+    std::cout << "BEGIN" << std::endl;
 }
 
 void CommandEnd::execute() const
 {
-    printf("END\n");
+    std::cout << "END" << std::endl;
 }
 
 void CommandPush::execute() const
