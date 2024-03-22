@@ -38,7 +38,6 @@ Cmd_t get_command_id(std::string str)
             return id;
         }
     }
-    std::cout << "meow\n";
     throw std::runtime_error("parse_command_name(): unknown command name!");
 }
 
@@ -50,6 +49,17 @@ static std::vector<std::string> REG_NAME_TO_REG_ID = {
     "EX",
     "FX",
     "PC"};
+
+static Val_t REGISTERS[] = {0, 0, 0, 0, 0, 0, 0};
+
+void set_register_value(Val_t val, Reg_t reg) {
+    REGISTERS[reg] = val;
+}
+
+Val_t get_register_value(Reg_t reg)
+{
+    return REGISTERS[reg];
+}
 
 Reg_t get_register_id(std::string str)
 {

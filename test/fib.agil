@@ -1,6 +1,282 @@
 BEGIN
-    IN
-    IN
-    MUL
+    PUSH 0
+    PUSH 1
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR AX
+    PUSHR BX
+    ADD
+    PUSHR BX
+    POPR AX
+    POPR BX
+
+    PUSHR BX
     OUT
 END

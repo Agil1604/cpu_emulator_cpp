@@ -37,23 +37,21 @@ void CommandEnd::execute() const
 void CommandPush::execute() const
 {
     program_stack.push(val_);
-    printf("PUSH %d\n", val_);
 }
 
 void CommandPop::execute() const
 {
     program_stack.pop();
-    printf("POP\n");
 }
 
 void CommandPushr::execute() const
 {
-    printf("PUSHR %s\n", get_register_name(reg_).c_str());
+    program_stack.push(get_register_value(reg_));
 }
 
 void CommandPopr::execute() const
 {
-    printf("POPR %s\n", get_register_name(reg_).c_str());
+    set_register_value(program_stack.pop(), reg_);
 }
 
 void CommandAdd::execute() const
@@ -61,7 +59,6 @@ void CommandAdd::execute() const
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op1 + op2);
-    printf("ADD\n");
 }
 
 void CommandSub::execute() const
@@ -69,7 +66,6 @@ void CommandSub::execute() const
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op1 - op2);
-    printf("SUB\n");
 }
 
 void CommandMul::execute() const
@@ -77,7 +73,6 @@ void CommandMul::execute() const
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op1 * op2);
-    printf("MUL\n");
 }
 
 void CommandDiv::execute() const
@@ -85,13 +80,11 @@ void CommandDiv::execute() const
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op1 / op2);
-    printf("DIV\n");
 }
 
 void CommandOut::execute() const
 {
     std::cout << program_stack.pop() << std::endl;
-    printf("Out\n");
 }
 
 void CommandIn::execute() const
@@ -99,7 +92,6 @@ void CommandIn::execute() const
     Val_t tmp;
     std::cin >> tmp;
     program_stack.push(tmp);
-    printf("IN\n");
 }
 
 //--------------------------
