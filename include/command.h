@@ -17,8 +17,6 @@ public:
     virtual void execute();
 
 private:
-    CommandType type_;
-
     Command *ptr_;
 };
 
@@ -60,23 +58,23 @@ public:
 class CommandPushr : public Command
 {
 public:
-    CommandPushr(Reg_t reg);
+    CommandPushr(std::string reg);
 
     void execute() override;
 
 private:
-    Reg_t reg_;
+    std::string reg_;
 };
 
 class CommandPopr : public Command
 {
 public:
-    CommandPopr(Reg_t reg);
+    CommandPopr(std::string reg);
 
     void execute() override;
 
 private:
-    Reg_t reg_;
+    std::string reg_;
 };
 
 class CommandAdd : public Command

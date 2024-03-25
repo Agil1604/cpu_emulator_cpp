@@ -3,9 +3,9 @@
 
 CommandPush::CommandPush(Val_t val) : val_(val) {}
 
-CommandPushr::CommandPushr(Reg_t reg) : reg_(reg) {}
+CommandPushr::CommandPushr(std::string reg) : reg_(reg) {}
 
-CommandPopr::CommandPopr(Reg_t reg) : reg_(reg) {}
+CommandPopr::CommandPopr(std::string reg) : reg_(reg) {}
 
 void CommandBegin::execute()
 {
@@ -77,26 +77,17 @@ void CommandIn::execute()
     program_stack.push(tmp);
 }
 
-Command::Command() : type_(CommandType::NOTHING), ptr_(nullptr) {}
+Command::Command() : ptr_(nullptr) {}
 
-Command::Command(Command &&that) : type_(that.type_),
-                                   ptr_(that.ptr_)
+Command::Command(Command &&that) : ptr_(that.ptr_)
 {
-    that.type_ = CommandType::NOTHING;
     that.ptr_ = nullptr;
 }
 
 Command &Command::operator=(Command &&that)
 {
-    if (this->type_ != CommandType::NOTHING)
-    {
-        delete this->ptr_;
-    }
-
-    type_ = that.type_;
+    delete this->ptr_;
     ptr_ = that.ptr_;
-
-    that.type_ = CommandType::NOTHING;
     that.ptr_ = nullptr;
 
     return *this;
@@ -109,10 +100,6 @@ void Command::execute()
 
 Command::~Command()
 {
-    if (type_ != CommandType::NOTHING)
-    {
-        delete ptr_;
-        type_ = CommandType::NOTHING;
-        ptr_ = nullptr;
-    }
+    delete ptr_;
+    ptr_ = nullptr;
 }

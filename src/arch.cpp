@@ -40,43 +40,35 @@ CommandType get_command_id(std::string str)
     throw std::runtime_error("parse_command_name(): unknown command name!");
 }
 
-std::vector<std::string> REG_NAME_TO_REG_ID = {
-    "AX",
-    "BX",
-    "CX",
-    "DX",
-    "EX",
-    "FX",
-    "PC"};
+std::map<std::string, Val_t> REG = {
+    {"AX", 0},
+    {"BX", 0},
+    {"CX", 0},
+    {"DX", 0},
+    {"EX", 0},
+    {"FX", 0},
+    {"PC", 0}};
 
-Val_t REGISTERS[] = {0, 0, 0, 0, 0, 0, 0};
-
-void set_register_value(Val_t val, Reg_t reg)
+void set_register_value(Val_t val, std::string reg)
 {
-    REGISTERS[reg] = val;
+    REG[reg] = val;
 }
 
-Val_t get_register_value(Reg_t reg)
+Val_t get_register_value(std::string reg)
 {
-    return REGISTERS[reg];
+    return REG[reg];
 }
 
-Reg_t get_register_id(std::string str)
+bool is_reg(std::string str)
 {
-    for (size_t id = 0U; id < REG_NAME_TO_REG_ID.size(); ++id)
+    for (auto id = REG.begin(); id != REG.end(); ++id)
     {
-        if (REG_NAME_TO_REG_ID[id] == str)
+        if (id->first == str)
         {
-            return id;
+            return true;
         }
     }
-
-    throw std::runtime_error("get_register_id(): unknown register name!");
-}
-
-std::string get_register_name(Reg_t reg)
-{
-    return REG_NAME_TO_REG_ID.at(reg);
+    return false;
 }
 
 Val_t get_value(std::string str)

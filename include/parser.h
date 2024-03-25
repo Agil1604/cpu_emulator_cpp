@@ -33,7 +33,7 @@ private:
     bool parse_newline_sequence();
 
     CommandType parse_command_name();
-    Reg_t parse_register_name();
+    std::string parse_register_name();
     Val_t parse_integral_value();
     Command *parse_command_line();
 

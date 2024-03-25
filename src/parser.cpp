@@ -102,7 +102,7 @@ CommandType Parser::parse_command_name()
     return get_command_id(cmd_name);
 }
 
-Reg_t Parser::parse_register_name()
+std::string Parser::parse_register_name()
 {
     static const std::regex pattern{"[a-zA-Z]+"};
 
@@ -116,13 +116,12 @@ Reg_t Parser::parse_register_name()
     // Perform parsing:
     std::string reg_name;
     success = parse_pattern(pattern, reg_name);
-    if (!success)
+    if (!success || !is_reg(reg_name))
     {
         throw std::runtime_error("Expected a register name!\n");
     }
 
-    // Throws an exception:
-    return get_register_id(reg_name);
+    return reg_name;
 }
 
 Val_t Parser::parse_integral_value()
@@ -149,10 +148,10 @@ Val_t Parser::parse_integral_value()
 
 Command *Parser::parse_command_line()
 {
-    CommandType cmd_id = parse_command_name();
+    CommandType cmd = parse_command_name();
 
     Command *to_return{};
-    switch (cmd_id)
+    switch (cmd)
     {
     case CommandType::BEGIN:
     {
@@ -178,14 +177,14 @@ Command *Parser::parse_command_line()
     }
     case CommandType::PUSHR:
     {
-        Reg_t reg = parse_register_name();
+        std::string reg = parse_register_name();
 
         to_return = new CommandPushr(reg);
         break;
     }
     case CommandType::POPR:
     {
-        Reg_t reg = parse_register_name();
+        std::string reg = parse_register_name();
 
         to_return = new CommandPopr(reg);
         break;
