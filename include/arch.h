@@ -4,17 +4,39 @@
 
 #include "stack.h"
 
+enum class CommandType
+{
+    NOTHING,
+    BEGIN,
+    END,
+    PUSH,
+    POP,
+    PUSHR,
+    POPR,
+    ADD,
+    SUB,
+    MUL,
+    DIV,
+    OUT,
+    IN,
+    JMP,
+    JNE,
+    JA,
+    JAE,
+    JB,
+    JBE,
+    CALL,
+    RET
+};
+
 /// @brief for values in stack
 typedef int32_t Val_t;
 Val_t get_value(std::string str);
 
-/// @brief for commands
-typedef uint8_t Cmd_t;
-
 /// @brief gets id of command by its name
 /// @param str name of command
 /// @return command id
-Cmd_t get_command_id(std::string str);
+CommandType get_command_id(std::string str);
 
 
 /// @brief for registers

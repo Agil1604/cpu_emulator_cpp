@@ -1,31 +1,6 @@
 #pragma once
 #include "arch.h"
 
-enum CommandType : Cmd_t
-{
-    NOTHING,
-    BEGIN,
-    END,
-    PUSH,
-    POP,
-    PUSHR,
-    POPR,
-    ADD,
-    SUB,
-    MUL,
-    DIV,
-    OUT,
-    IN,
-    JMP,
-    JNE,
-    JA,
-    JAE,
-    JB,
-    JBE,
-    CALL,
-    RET
-};
-
 class Command
 {
 public:

@@ -32,7 +32,7 @@ private:
     bool parse_space_sequence();
     bool parse_newline_sequence();
 
-    Cmd_t parse_command_name();
+    CommandType parse_command_name();
     Reg_t parse_register_name();
     Val_t parse_integral_value();
     Command *parse_command_line();

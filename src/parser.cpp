@@ -83,7 +83,7 @@ bool Parser::parse_newline_sequence()
     return success;
 }
 
-Cmd_t Parser::parse_command_name()
+CommandType Parser::parse_command_name()
 {
     static const std::regex pattern{"[a-zA-Z]+"};
 
@@ -149,7 +149,7 @@ Val_t Parser::parse_integral_value()
 
 Command *Parser::parse_command_line()
 {
-    Cmd_t cmd_id = parse_command_name();
+    CommandType cmd_id = parse_command_name();
 
     Command *to_return{};
     switch (cmd_id)
