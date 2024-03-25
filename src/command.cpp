@@ -1,154 +1,83 @@
 #include "command.h"
 #include "arch.h"
 
-CommandPush::CommandPush(Val_t val) : val_(val)
-{
-}
+CommandPush::CommandPush(Val_t val) : val_(val) {}
 
-CommandPushr::CommandPushr(Reg_t reg) : reg_(reg)
-{
-}
+CommandPushr::CommandPushr(Reg_t reg) : reg_(reg) {}
 
-CommandPopr::CommandPopr(Reg_t reg) : reg_(reg)
-{
-}
+CommandPopr::CommandPopr(Reg_t reg) : reg_(reg) {}
 
-
-
-void CommandBegin::execute() const
+void CommandBegin::execute()
 {
     std::cout << "BEGIN" << std::endl;
 }
 
-void CommandEnd::execute() const
+void CommandEnd::execute()
 {
     std::cout << "END" << std::endl;
 }
 
-void CommandPush::execute() const
+void CommandPush::execute()
 {
     program_stack.push(val_);
 }
 
-void CommandPop::execute() const
+void CommandPop::execute()
 {
     program_stack.pop();
 }
 
-void CommandPushr::execute() const
+void CommandPushr::execute()
 {
     program_stack.push(get_register_value(reg_));
 }
 
-void CommandPopr::execute() const
+void CommandPopr::execute()
 {
     set_register_value(program_stack.pop(), reg_);
 }
 
-void CommandAdd::execute() const
+void CommandAdd::execute()
 {
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op1 + op2);
 }
 
-void CommandSub::execute() const
+void CommandSub::execute()
 {
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op2 - op1);
 }
 
-void CommandMul::execute() const
+void CommandMul::execute()
 {
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op1 * op2);
 }
 
-void CommandDiv::execute() const
+void CommandDiv::execute()
 {
     Val_t op1 = program_stack.pop();
     Val_t op2 = program_stack.pop();
     program_stack.push(op2 / op1);
 }
 
-void CommandOut::execute() const
+void CommandOut::execute()
 {
     std::cout << program_stack.pop() << std::endl;
 }
 
-void CommandIn::execute() const
+void CommandIn::execute()
 {
     Val_t tmp;
     std::cin >> tmp;
     program_stack.push(tmp);
 }
 
-Command::Command() : type_(CommandType::NOTHING),
-                     ptr_(nullptr)
-{
-}
-
-Command::Command(CommandBegin *cmd) : type_(CommandType::BEGIN),
-                                      ptr_(cmd)
-{
-}
-
-Command::Command(CommandEnd *cmd) : type_(CommandType::END),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandPush *cmd) : type_(CommandType::PUSH),
-                                     ptr_(cmd)
-{
-}
-
-Command::Command(CommandPop *cmd) : type_(CommandType::POP),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandPushr *cmd) : type_(CommandType::PUSHR),
-                                      ptr_(cmd)
-{
-}
-
-Command::Command(CommandPopr *cmd) : type_(CommandType::POPR),
-                                     ptr_(cmd)
-{
-}
-
-Command::Command(CommandAdd *cmd) : type_(CommandType::ADD),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandSub *cmd) : type_(CommandType::SUB),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandMul *cmd) : type_(CommandType::MUL),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandDiv *cmd) : type_(CommandType::DIV),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandOut *cmd) : type_(CommandType::OUT),
-                                    ptr_(cmd)
-{
-}
-
-Command::Command(CommandIn *cmd) : type_(CommandType::IN),
-                                   ptr_(cmd)
-{
-}
+Command::Command() : type_(CommandType::NOTHING), ptr_(nullptr) {}
 
 Command::Command(Command &&that) : type_(that.type_),
                                    ptr_(that.ptr_)
@@ -159,7 +88,10 @@ Command::Command(Command &&that) : type_(that.type_),
 
 Command &Command::operator=(Command &&that)
 {
-    this->release();
+    if (this->type_ != CommandType::NOTHING)
+    {
+        delete this->ptr_;
+    }
 
     type_ = that.type_;
     ptr_ = that.ptr_;
@@ -170,180 +102,17 @@ Command &Command::operator=(Command &&that)
     return *this;
 }
 
-void Command::execute() const
+void Command::execute()
 {
-    switch (type_)
-    {
-    case CommandType::BEGIN:
-    {
-        CommandBegin *ptr = static_cast<CommandBegin *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::END:
-    {
-        CommandEnd *ptr = static_cast<CommandEnd *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::PUSH:
-    {
-        CommandPush *ptr = static_cast<CommandPush *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::POP:
-    {
-        CommandPop *ptr = static_cast<CommandPop *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::PUSHR:
-    {
-        CommandPushr *ptr = static_cast<CommandPushr *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::POPR:
-    {
-        CommandPopr *ptr = static_cast<CommandPopr *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::ADD:
-    {
-        CommandAdd *ptr = static_cast<CommandAdd *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::SUB:
-    {
-        CommandSub *ptr = static_cast<CommandSub *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::MUL:
-    {
-        CommandMul *ptr = static_cast<CommandMul *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::DIV:
-    {
-        CommandDiv *ptr = static_cast<CommandDiv *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::OUT:
-    {
-        CommandOut *ptr = static_cast<CommandOut *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    case CommandType::IN:
-    {
-        CommandIn *ptr = static_cast<CommandIn *>(ptr_);
-        ptr->execute();
-        break;
-    }
-    default:
-    {
-        throw std::runtime_error("Command::execute(): invalid Command type");
-    }
-    }
-}
-
-void Command::release()
-{
-    if (type_ == CommandType::NOTHING)
-    {
-        return;
-    }
-
-    switch (type_)
-    {
-    case CommandType::BEGIN:
-    {
-        CommandBegin *ptr = static_cast<CommandBegin *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::END:
-    {
-        CommandEnd *ptr = static_cast<CommandEnd *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::PUSH:
-    {
-        CommandPush *ptr = static_cast<CommandPush *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::POP:
-    {
-        CommandPop *ptr = static_cast<CommandPop *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::PUSHR:
-    {
-        CommandPushr *ptr = static_cast<CommandPushr *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::POPR:
-    {
-        CommandPopr *ptr = static_cast<CommandPopr *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::ADD:
-    {
-        CommandAdd *ptr = static_cast<CommandAdd *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::SUB:
-    {
-        CommandSub *ptr = static_cast<CommandSub *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::MUL:
-    {
-        CommandMul *ptr = static_cast<CommandMul *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::DIV:
-    {
-        CommandDiv *ptr = static_cast<CommandDiv *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::OUT:
-    {
-        CommandOut *ptr = static_cast<CommandOut *>(ptr_);
-        delete ptr;
-        break;
-    }
-    case CommandType::IN:
-    {
-        CommandIn *ptr = static_cast<CommandIn *>(ptr_);
-        delete ptr;
-        break;
-    }
-    default:
-    {
-    }
-    }
-
-    type_ = CommandType::NOTHING;
-    ptr_ = nullptr;
+    ptr_->execute();
 }
 
 Command::~Command()
 {
-    release();
+    if (type_ != CommandType::NOTHING)
+    {
+        delete ptr_;
+        type_ = CommandType::NOTHING;
+        ptr_ = nullptr;
+    }
 }

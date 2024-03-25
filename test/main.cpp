@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
     const char *filename = argv[1];
 
     Parser parser{filename};
-    std::vector<Command> commands = parser.parse_command_sequence();
+    std::vector<Command*> commands = parser.parse_command_sequence();
 
     for (const auto &cmd : commands)
     {
-        cmd.execute();
+        cmd->execute();
     }
     return 0;
 }

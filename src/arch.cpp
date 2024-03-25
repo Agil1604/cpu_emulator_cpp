@@ -3,7 +3,7 @@
 
 #include <vector>
 
-static std::vector<std::string> CMD_NAME_TO_CMD_ID = {
+std::vector<std::string> CMD_NAME_TO_CMD_ID = {
     "NOTHING", // CommandType::NOTHING
     "BEGIN",   // CommandType::BEGIN
     "END",     // CommandType::END
@@ -39,7 +39,7 @@ Cmd_t get_command_id(std::string str)
     throw std::runtime_error("parse_command_name(): unknown command name!");
 }
 
-static std::vector<std::string> REG_NAME_TO_REG_ID = {
+std::vector<std::string> REG_NAME_TO_REG_ID = {
     "AX",
     "BX",
     "CX",
@@ -48,7 +48,7 @@ static std::vector<std::string> REG_NAME_TO_REG_ID = {
     "FX",
     "PC"};
 
-static Val_t REGISTERS[] = {0, 0, 0, 0, 0, 0, 0};
+Val_t REGISTERS[] = {0, 0, 0, 0, 0, 0, 0};
 
 void set_register_value(Val_t val, Reg_t reg) {
     REGISTERS[reg] = val;

@@ -152,79 +152,77 @@ Val_t Parser::parse_integral_value()
     return get_value(val_str);
 }
 
-Command Parser::parse_command_line()
+Command* Parser::parse_command_line()
 {
-    // Parse command name:
     Cmd_t cmd_id = parse_command_name();
 
-    // Dispatch based on command format:
-    Command to_return{};
+    Command* to_return{};
     switch (cmd_id)
     {
     case CommandType::BEGIN:
     {
-        to_return = Command(new CommandBegin());
+        to_return = new CommandBegin();
         break;
     }
     case CommandType::END:
     {
-        to_return = Command(new CommandEnd());
+        to_return = new CommandEnd();
         break;
     }
     case CommandType::PUSH:
     {
         Val_t val = parse_integral_value();
 
-        to_return = Command(new CommandPush(val));
+        to_return = new CommandPush(val);
         break;
     }
     case CommandType::POP:
     {
-        to_return = Command(new CommandPop());
+        to_return = new CommandPop();
         break;
     }
     case CommandType::PUSHR:
     {
         Reg_t reg = parse_register_name();
 
-        to_return = Command(new CommandPushr(reg));
+        to_return = new CommandPushr(reg);
         break;
     }
     case CommandType::POPR:
     {
         Reg_t reg = parse_register_name();
 
-        to_return = Command(new CommandPopr(reg));
+        to_return = new CommandPopr(reg);
         break;
     }
     case CommandType::ADD:
     {
-        to_return = Command(new CommandAdd());
+        to_return = new CommandAdd();
         break;
     }
     case CommandType::SUB:
     {
-        to_return = Command(new CommandSub());
+        to_return = new CommandSub();
         break;
     }
     case CommandType::MUL:
     {
-        to_return = Command(new CommandMul());
+        to_return = new CommandMul();
         break;
     }
     case CommandType::DIV:
     {
-        to_return = Command(new CommandDiv());
+        to_return = new CommandDiv();
         break;
     }
     case CommandType::IN:
     {
-        to_return = Command(new CommandIn());
+        to_return = new CommandIn();
         break;
     }
     case CommandType::OUT:
     {
-        to_return = Command(new CommandOut());
+        to_return = new CommandOut();
         break;
     }
     default:
@@ -238,9 +236,9 @@ Command Parser::parse_command_line()
     return to_return;
 }
 
-std::vector<Command> Parser::parse_command_sequence()
+std::vector<Command*> Parser::parse_command_sequence()
 {
-    std::vector<Command> commands{};
+    std::vector<Command*> commands{};
 
     while (!parse_end_of_file())
     {

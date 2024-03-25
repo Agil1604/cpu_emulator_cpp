@@ -3,151 +3,33 @@
 
 enum CommandType : Cmd_t
 {
-    NOTHING = 0,
-    BEGIN = 1,
-    END = 2,
-    PUSH = 3,
-    POP = 4,
-    PUSHR = 5,
-    POPR = 6,
-    ADD = 7,
-    SUB = 8,
-    MUL = 9,
-    DIV = 10,
-    OUT = 11,
-    IN = 12,
-    JMP = 13,
-    JNE = 14,
-    JA = 15,
-    JAE = 16,
-    JB = 17,
-    JBE = 18,
-    CALL = 19,
-    RET = 20
+    NOTHING,
+    BEGIN,
+    END,
+    PUSH,
+    POP,
+    PUSHR,
+    POPR,
+    ADD,
+    SUB,
+    MUL,
+    DIV,
+    OUT,
+    IN,
+    JMP,
+    JNE,
+    JA,
+    JAE,
+    JB,
+    JBE,
+    CALL,
+    RET
 };
-
-class CommandBegin
-{
-public:
-    CommandBegin() = default;
-
-    void execute() const;
-};
-
-class CommandEnd
-{
-public:
-    CommandEnd() = default;
-
-    void execute() const;
-};
-
-class CommandPush
-{
-public:
-    CommandPush(Val_t val);
-
-    void execute() const;
-
-private:
-    Val_t val_;
-};
-
-class CommandPop
-{
-public:
-    CommandPop() = default;
-
-    void execute() const;
-};
-
-class CommandPushr
-{
-public:
-    CommandPushr(Reg_t reg);
-
-    void execute() const;
-
-private:
-    Reg_t reg_;
-};
-
-class CommandPopr
-{
-public:
-    CommandPopr(Reg_t reg);
-
-    void execute() const;
-
-private:
-    Reg_t reg_;
-};
-
-class CommandAdd
-{
-public:
-    CommandAdd() = default;
-
-    void execute() const;
-};
-
-class CommandSub
-{
-public:
-    CommandSub() = default;
-
-    void execute() const;
-};
-
-class CommandMul
-{
-public:
-    CommandMul() = default;
-
-    void execute() const;
-};
-
-class CommandDiv
-{
-public:
-    CommandDiv() = default;
-
-    void execute() const;
-};
-
-class CommandOut
-{
-public:
-    CommandOut() = default;
-
-    void execute() const;
-};
-
-class CommandIn
-{
-public:
-    CommandIn() = default;
-
-    void execute() const;
-};
-
 
 class Command
 {
 public:
     Command();
-    Command(CommandBegin *cmd);
-    Command(CommandEnd *cmd);
-    Command(CommandPush *cmd);
-    Command(CommandPop *cmd);
-    Command(CommandPushr *cmd);
-    Command(CommandPopr *cmd);
-    Command(CommandAdd *cmd);
-    Command(CommandSub *cmd);
-    Command(CommandDiv *cmd);
-    Command(CommandMul *cmd);
-    Command(CommandOut *cmd);
-    Command(CommandIn *cmd);
 
     ~Command();
 
@@ -157,12 +39,115 @@ public:
     Command &operator=(const Command &) = delete;
     Command &operator=(Command &&);
 
-    void execute() const;
+    virtual void execute();
 
 private:
-    void release();
-
     CommandType type_;
 
-    void *ptr_;
+    Command *ptr_;
+};
+
+class CommandBegin : public Command
+{
+public:
+    CommandBegin() = default;
+
+    void execute() override;
+};
+
+class CommandEnd : public Command
+{
+public:
+    CommandEnd() = default;
+
+    void execute() override;
+};
+
+class CommandPush : public Command
+{
+public:
+    CommandPush(Val_t val);
+
+    void execute() override;
+
+private:
+    Val_t val_;
+};
+
+class CommandPop : public Command
+{
+public:
+    CommandPop() = default;
+
+    void execute() override;
+};
+
+class CommandPushr : public Command
+{
+public:
+    CommandPushr(Reg_t reg);
+
+    void execute() override;
+
+private:
+    Reg_t reg_;
+};
+
+class CommandPopr : public Command
+{
+public:
+    CommandPopr(Reg_t reg);
+
+    void execute() override;
+
+private:
+    Reg_t reg_;
+};
+
+class CommandAdd : public Command
+{
+public:
+    CommandAdd() = default;
+
+    void execute() override;
+};
+
+class CommandSub : public Command
+{
+public:
+    CommandSub() = default;
+
+    void execute() override;
+};
+
+class CommandMul : public Command
+{
+public:
+    CommandMul() = default;
+
+    void execute() override;
+};
+
+class CommandDiv : public Command
+{
+public:
+    CommandDiv() = default;
+
+    void execute() override;
+};
+
+class CommandOut : public Command
+{
+public:
+    CommandOut() = default;
+
+    void execute() override;
+};
+
+class CommandIn : public Command
+{
+public:
+    CommandIn() = default;
+
+    void execute() override;
 };
