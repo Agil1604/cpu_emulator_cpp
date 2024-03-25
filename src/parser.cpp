@@ -83,11 +83,6 @@ bool Parser::parse_newline_sequence()
     return success;
 }
 
-bool Parser::parse_end_of_file()
-{
-    return file_.eof();
-}
-
 Cmd_t Parser::parse_command_name()
 {
     static const std::regex pattern{"[a-zA-Z]+"};
@@ -152,11 +147,11 @@ Val_t Parser::parse_integral_value()
     return get_value(val_str);
 }
 
-Command* Parser::parse_command_line()
+Command *Parser::parse_command_line()
 {
     Cmd_t cmd_id = parse_command_name();
 
-    Command* to_return{};
+    Command *to_return{};
     switch (cmd_id)
     {
     case CommandType::BEGIN:
@@ -236,11 +231,11 @@ Command* Parser::parse_command_line()
     return to_return;
 }
 
-std::vector<Command*> Parser::parse_command_sequence()
+std::vector<Command *> Parser::parse_command_sequence()
 {
-    std::vector<Command*> commands{};
+    std::vector<Command *> commands{};
 
-    while (!parse_end_of_file())
+    while (!file_.eof())
     {
         commands.push_back(parse_command_line());
     }

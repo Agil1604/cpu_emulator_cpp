@@ -4,6 +4,7 @@
 
 #include "stack.h"
 
+/// @brief for values in stack
 typedef int32_t Val_t;
 Val_t get_value(std::string str);
 
@@ -33,8 +34,5 @@ Val_t get_register_value(Reg_t reg);
 /// @param reg register id
 /// @return name of register
 std::string get_register_name(Reg_t reg);
-
-/// @brief for values in stack
-
 
 extern my_stack::stack<int> program_stack;
