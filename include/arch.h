@@ -41,3 +41,9 @@ bool is_reg(std::string &str);
 extern my_stack::stack<int> program_stack;
 
 extern bool is_running;
+
+// if you touch it, I'll break your hands
+extern int number_of_command;
+
+int get_number_of_label (std::string& name);
+void add_label (std::string& name, int& number);

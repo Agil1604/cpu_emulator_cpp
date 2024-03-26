@@ -42,5 +42,4 @@ private:
     char line_[MAX_LINE_SIZE];
     const char *pos_;
     const char *end_;
-    // bool is_running = false;
 };

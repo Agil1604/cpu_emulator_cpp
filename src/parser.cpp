@@ -8,7 +8,6 @@ Parser::Parser(const char *filename) : file_(std::ifstream(filename, std::ios::i
         std::cout << "wrong filename\n";
         exit(EXIT_FAILURE);
     }
-    // Initialize the first line:
     read_line_from_file();
 }
 
@@ -47,12 +46,11 @@ bool Parser::parse_pattern(const std::regex &regexp, std::string &ret)
 {
     std::cmatch match_result{};
     bool match_status = std::regex_search(
-        pos_, end_,                              // The iterators limiting the matched sequence
-        match_result,                            // Match result
-        regexp,                                  // Regular expression specifying the pattern
-        std::regex_constants::match_continuous); // Start matching from the beginning
+        pos_, end_,
+        match_result,
+        regexp,
+        std::regex_constants::match_continuous);
 
-    // Move the iterator on success:
     if (match_status)
     {
         pos_ = match_result[0].second;
@@ -84,12 +82,10 @@ bool Parser::parse_newline_sequence()
 
 CommandType Parser::parse_command_name()
 {
-    static const std::regex pattern{"[A-Z]+"};
+    static const std::regex pattern{"[a-zA-Z]+"};
 
-    // Skip leading whitespaces (may be none):
     parse_space_sequence();
 
-    // Perform parsing:
     std::string cmd_name;
     bool success = parse_pattern(pattern, cmd_name);
     if (!success)
@@ -97,7 +93,6 @@ CommandType Parser::parse_command_name()
         throw std::runtime_error("Unable to parse command name!\n");
     }
 
-    // Throws an exception:
     return get_command_id(cmd_name);
 }
 
@@ -105,14 +100,12 @@ std::string Parser::parse_register_name()
 {
     static const std::regex pattern{"[a-zA-Z]+"};
 
-    // Skip leading whitespaces:
     bool success = parse_space_sequence();
     if (!success)
     {
         throw std::runtime_error("Expected a space sequence before command name!\n");
     }
 
-    // Perform parsing:
     std::string reg_name;
     success = parse_pattern(pattern, reg_name);
     if (!success || !is_reg(reg_name))
@@ -127,14 +120,12 @@ Val_t Parser::parse_integral_value()
 {
     static const std::regex pattern{"(\\+|-)?(0|[1-9][0-9]*)"};
 
-    // Skip leading whitespaces:
     bool success = parse_space_sequence();
     if (!success)
     {
         throw std::runtime_error("Expected a space sequence before integral value!\n");
     }
 
-    // Perform parsing:
     std::string val_str;
     success = parse_pattern(pattern, val_str);
     if (!success)
@@ -218,6 +209,11 @@ Command *Parser::parse_command_line()
         to_return = new CommandOut();
         break;
     }
+    case CommandType::NOTHING:
+    {
+        to_return = new Nothing();
+        break;
+    }
     default:
     {
         throw std::runtime_error("Parser::parse_command_line(): invalid command id");
@@ -236,13 +232,14 @@ std::vector<Command *> Parser::parse_command_sequence()
     while (!file_.eof())
     {
         commands.push_back(parse_command_line());
+        ++number_of_command;
     }
     return commands;
 }
 
 void Parser::run()
 {
-    std::vector<Command*> commands = parse_command_sequence();
+    std::vector<Command *> commands = parse_command_sequence();
 
     for (const auto &cmd : commands)
     {

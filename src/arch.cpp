@@ -4,6 +4,10 @@
 #include <map>
 #include <vector>
 
+//----------
+// Commnads
+//----------
+
 const std::map<std::string, CommandType> CMD = {
     {"NOTHING", CommandType::NOTHING},
     {"BEGIN", CommandType::BEGIN},
@@ -37,8 +41,14 @@ CommandType get_command_id(std::string &str)
             return id->second;
         }
     }
-    throw std::runtime_error("parse_command_name(): unknown command name!");
+
+    add_label(str, number_of_command);
+    return CommandType::NOTHING;
 }
+
+//----------
+// Registers
+//----------
 
 std::map<std::string, Val_t> REG = {
     {"AX", 0},
@@ -49,7 +59,6 @@ std::map<std::string, Val_t> REG = {
     {"FX", 0},
     {"PC", 0}};
 
-// cтоит ли убрать эти две функции???
 void set_register_value(Val_t val, std::string reg)
 {
     REG[reg] = val;
@@ -72,6 +81,33 @@ bool is_reg(std::string &str)
     return false;
 }
 
+//-------
+// Labels
+//-------
+
+std::map<std::string, int> labels = {};
+
+void add_label (std::string& name, int& number)
+{
+    labels[name] = number;
+}
+
+int get_number_of_label (std::string& name)
+{
+    for (auto id = labels.begin(); id != labels.end(); ++id)
+    {
+        if (id->first == name)
+        {
+            return id->second;
+        }
+    }
+    throw std::runtime_error("NO such label!");
+}
+
+//-------
+// Other
+//-------
+
 Val_t get_value(std::string str)
 {
     Val_t tmp = std::atoi(str.c_str());
@@ -86,3 +122,5 @@ Val_t get_value(std::string str)
 my_stack::stack<int> program_stack;
 
 bool is_running = false;
+
+int number_of_command = 0;

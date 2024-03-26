@@ -108,3 +108,10 @@ public:
     CommandIn() = default;
     void execute() override;
 };
+
+class Nothing : public Command
+{
+public:
+    Nothing() = default;
+    void execute() override;
+};
