@@ -26,16 +26,15 @@ void Parser::read_line_from_file()
     end_ = line_ + std::strlen(line_);
 }
 
-bool Parser::parse_pattern(std::regex regexp)
+bool Parser::parse_pattern(const std::regex &regexp)
 {
     std::cmatch match_result{};
     bool match_status = std::regex_search(
-        pos_, end_,                              // The iterators limiting the matched sequence
-        match_result,                            // Match result
-        regexp,                                  // Regular expression specifying the pattern
-        std::regex_constants::match_continuous); // Start matching from the beginning
+        pos_, end_,
+        match_result,
+        regexp,
+        std::regex_constants::match_continuous);
 
-    // Move the iterator on success:
     if (match_status)
     {
         pos_ = match_result[0].second;
@@ -44,7 +43,7 @@ bool Parser::parse_pattern(std::regex regexp)
     return match_status;
 }
 
-bool Parser::parse_pattern(std::regex regexp, std::string &ret)
+bool Parser::parse_pattern(const std::regex &regexp, std::string &ret)
 {
     std::cmatch match_result{};
     bool match_status = std::regex_search(
@@ -239,4 +238,14 @@ std::vector<Command *> Parser::parse_command_sequence()
         commands.push_back(parse_command_line());
     }
     return commands;
+}
+
+void Parser::run()
+{
+    std::vector<Command*> commands = parse_command_sequence();
+
+    for (const auto &cmd : commands)
+    {
+        cmd->execute();
+    }
 }

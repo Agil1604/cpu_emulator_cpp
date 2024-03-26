@@ -32,10 +32,10 @@ enum class CommandType
 typedef int32_t Val_t;
 Val_t get_value(std::string str);
 
-CommandType get_command_id(std::string str);
+CommandType get_command_id(std::string &str);
 
 void set_register_value(Val_t val, std::string reg);
 Val_t get_register_value(std::string reg);
-bool is_reg(std::string str);
+bool is_reg(std::string &str);
 
 extern my_stack::stack<int> program_stack;

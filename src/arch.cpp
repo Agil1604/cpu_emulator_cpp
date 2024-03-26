@@ -28,7 +28,7 @@ const std::map<std::string, CommandType> CMD = {
     {"RET", CommandType::RET},
 };
 
-CommandType get_command_id(std::string str)
+CommandType get_command_id(std::string &str)
 {
     for (auto id = CMD.begin(); id != CMD.end(); ++id)
     {
@@ -49,6 +49,7 @@ std::map<std::string, Val_t> REG = {
     {"FX", 0},
     {"PC", 0}};
 
+// cтоит ли убрать эти две функции?
 void set_register_value(Val_t val, std::string reg)
 {
     REG[reg] = val;
@@ -59,7 +60,7 @@ Val_t get_register_value(std::string reg)
     return REG[reg];
 }
 
-bool is_reg(std::string str)
+bool is_reg(std::string &str)
 {
     for (auto id = REG.begin(); id != REG.end(); ++id)
     {

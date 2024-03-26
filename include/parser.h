@@ -21,13 +21,12 @@ public:
     Parser &operator=(const Parser &) = delete;
     Parser &operator=(Parser &&) = default;
 
-    std::vector<Command*> parse_command_sequence();
-
+    void run();
 private:
     void read_line_from_file();
 
-    bool parse_pattern(std::regex regexp);
-    bool parse_pattern(std::regex regexp, std::string &ret);
+    bool parse_pattern(const std::regex &regexp);
+    bool parse_pattern(const std::regex &regexp, std::string &ret);
 
     bool parse_space_sequence();
     bool parse_newline_sequence();
@@ -36,6 +35,8 @@ private:
     std::string parse_register_name();
     Val_t parse_integral_value();
     Command *parse_command_line();
+
+    std::vector<Command *> parse_command_sequence();
 
     std::ifstream file_;
     char line_[MAX_LINE_SIZE];

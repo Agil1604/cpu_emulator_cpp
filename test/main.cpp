@@ -1,9 +1,6 @@
 #include <iostream>
-#include <stdlib.h>
-#include <vector>
 
 #include "parser.h"
-#include "stack.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,13 +11,8 @@ int main(int argc, char *argv[])
     }
 
     const char *filename = argv[1];
-
     Parser parser{filename};
-    std::vector<Command*> commands = parser.parse_command_sequence();
+    parser.run();
 
-    for (const auto &cmd : commands)
-    {
-        cmd->execute();
-    }
     return 0;
 }
