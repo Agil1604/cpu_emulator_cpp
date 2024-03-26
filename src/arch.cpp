@@ -5,9 +5,10 @@
 #include <vector>
 
 //----------
-// Commnads
+// Commands
 //----------
 
+/// @brief связь между id команд и их названиями
 const std::map<std::string, CommandType> CMD = {
     {"NOTHING", CommandType::NOTHING},
     {"BEGIN", CommandType::BEGIN},
@@ -50,6 +51,7 @@ CommandType get_command_id(std::string &str)
 // Registers
 //----------
 
+/// @brief хранимые в регистрах значения
 std::map<std::string, Val_t> REG = {
     {"AX", 0},
     {"BX", 0},
@@ -85,14 +87,15 @@ bool is_reg(std::string &str)
 // Labels
 //-------
 
+/// @brief мапа всех хранимых меток
 std::map<std::string, int> labels = {};
 
-void add_label (std::string& name, int& number)
+void add_label(std::string &name, int &number)
 {
     labels[name] = number;
 }
 
-int get_number_of_label (std::string& name)
+int get_number_of_label(std::string &name)
 {
     for (auto id = labels.begin(); id != labels.end(); ++id)
     {

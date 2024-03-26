@@ -7,7 +7,7 @@ CommandPushr::CommandPushr(std::string reg) : reg_(reg) {}
 
 CommandPopr::CommandPopr(std::string reg) : reg_(reg) {}
 
-void Nothing::execute(){}
+void Nothing::execute() {}
 
 void CommandBegin::execute()
 {

@@ -225,21 +225,22 @@ Command *Parser::parse_command_line()
     return to_return;
 }
 
-std::vector<Command *> Parser::parse_command_sequence()
+void Parser::parse_command_sequence()
 {
-    std::vector<Command *> commands{};
-
     while (!file_.eof())
     {
         commands.push_back(parse_command_line());
         ++number_of_command;
     }
-    return commands;
+    is_parsed = true;
 }
 
 void Parser::run()
 {
-    std::vector<Command *> commands = parse_command_sequence();
+    if (!is_parsed)
+    {
+        parse_command_sequence();
+    }
 
     for (const auto &cmd : commands)
     {

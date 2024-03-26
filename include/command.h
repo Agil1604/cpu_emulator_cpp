@@ -1,6 +1,7 @@
 #pragma once
 #include "arch.h"
 
+/// @brief отец всех комманд
 class Command
 {
 public:
@@ -38,6 +39,7 @@ class CommandPush : public Command
 public:
     CommandPush(Val_t val);
     void execute() override;
+
 private:
     Val_t val_;
 };
@@ -54,6 +56,7 @@ class CommandPushr : public Command
 public:
     CommandPushr(std::string reg);
     void execute() override;
+
 private:
     std::string reg_;
 };
@@ -63,6 +66,7 @@ class CommandPopr : public Command
 public:
     CommandPopr(std::string reg);
     void execute() override;
+
 private:
     std::string reg_;
 };

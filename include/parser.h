@@ -21,7 +21,9 @@ public:
     Parser &operator=(const Parser &) = delete;
     Parser &operator=(Parser &&) = default;
 
+    /// @brief функция, которая запускает отпарсенную программу
     void run();
+
 private:
     void read_line_from_file();
 
@@ -36,10 +38,13 @@ private:
     Val_t parse_integral_value();
     Command *parse_command_line();
 
-    std::vector<Command *> parse_command_sequence();
+    void parse_command_sequence();
 
-    std::ifstream file_;
-    char line_[MAX_LINE_SIZE];
-    const char *pos_;
-    const char *end_;
+    std::vector<Command *> commands = {}; // вектор получившихся команд
+    bool is_parsed = false;               // благодаря этой переменной можно делать сколько угодно раз run()
+
+    std::ifstream file_;       // файл с программой
+    char line_[MAX_LINE_SIZE]; // текущая линия
+    const char *pos_;          // текущая позиция в строке
+    const char *end_;          // конец строки
 };
