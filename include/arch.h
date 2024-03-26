@@ -39,3 +39,5 @@ Val_t get_register_value(std::string reg);
 bool is_reg(std::string &str);
 
 extern my_stack::stack<int> program_stack;
+
+extern bool is_running;

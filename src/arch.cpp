@@ -84,3 +84,5 @@ Val_t get_value(std::string str)
 }
 
 my_stack::stack<int> program_stack;
+
+bool is_running = false;
