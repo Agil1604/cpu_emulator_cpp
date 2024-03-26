@@ -84,7 +84,7 @@ bool Parser::parse_newline_sequence()
 
 CommandType Parser::parse_command_name()
 {
-    static const std::regex pattern{"[a-zA-Z]+"};
+    static const std::regex pattern{"[A-Z]+"};
 
     // Skip leading whitespaces (may be none):
     parse_space_sequence();

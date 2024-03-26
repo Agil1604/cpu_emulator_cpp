@@ -49,7 +49,7 @@ std::map<std::string, Val_t> REG = {
     {"FX", 0},
     {"PC", 0}};
 
-// cтоит ли убрать эти две функции?
+// cтоит ли убрать эти две функции???
 void set_register_value(Val_t val, std::string reg)
 {
     REG[reg] = val;
@@ -78,7 +78,7 @@ Val_t get_value(std::string str)
 
     if (!(std::to_string(tmp) == str))
     {
-        throw std::runtime_error("get_value(): inputted value isn't a number!");
+        throw std::runtime_error("get_value(): inputted value isn't an integer!");
     }
     return tmp;
 }

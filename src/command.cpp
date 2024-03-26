@@ -72,9 +72,9 @@ void CommandOut::execute()
 
 void CommandIn::execute()
 {
-    Val_t tmp;
+    std::string tmp;
     std::cin >> tmp;
-    program_stack.push(tmp);
+    program_stack.push(get_value(tmp));
 }
 
 Command::Command() : ptr_(nullptr) {}

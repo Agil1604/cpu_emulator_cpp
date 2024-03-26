@@ -13,7 +13,7 @@ public:
     Command &operator=(const Command &) = delete;
     Command &operator=(Command &&);
 
-    virtual void execute();
+    virtual void execute() = 0;
 
 private:
     Command *ptr_;
