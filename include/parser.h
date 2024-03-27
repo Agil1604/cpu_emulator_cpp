@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <regex>
+#include <string>
 
 #define MAX_LINE_SIZE 120U
 
@@ -11,7 +12,7 @@ class Parser
 {
 public:
     Parser() = delete;
-    explicit Parser(const char *filename);
+    explicit Parser(std::string filename);
 
     ~Parser() = default;
 

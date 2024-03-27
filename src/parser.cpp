@@ -1,7 +1,7 @@
 #include "parser.h"
 #include "arch.h"
 
-Parser::Parser(const char *filename) : file_(std::ifstream(filename, std::ios::in))
+Parser::Parser(std::string filename) : file_(std::ifstream(filename, std::ios::in))
 {
     if (!file_.good())
     {

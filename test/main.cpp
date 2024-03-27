@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 #include "parser.h"
 
 int main(int argc, char *argv[])
@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    const char *filename = argv[1];
+    std::string filename = argv[1];
     Parser parser{filename};
     parser.run();
 
