@@ -9,7 +9,7 @@ add_subdirectory("test")
 add_subdirectory("include")
 add_subdirectory("src")
 
-set(SOURCE_LIB src/arch.cpp src/command.cpp src/parser.cpp src/cpu.cpp)
+set(SOURCE_LIB src/arch.cpp src/command.cpp src/parser.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_library(parser STATIC ${SOURCE_LIB})
 
